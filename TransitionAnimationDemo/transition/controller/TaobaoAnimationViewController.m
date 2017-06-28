@@ -48,18 +48,23 @@
     [self.maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMyPicker:)]];
     [self.view addSubview:self.maskView];
     self.maskView.hidden = YES;
-        
+    
+    UIView *navbarView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, IphoneWidth, 64.0f)];
+    navbarView.backgroundColor = RGBCOLOR(25, 136, 53);
+    [self.mainBackgroundView addSubview:navbarView];
+    
     // 自定义标题
     UILabel *title = [[UILabel alloc] init];
     title.frame = CGRectMake(.0f, 20.0f, self.view.frame.size.width, 44.0f);
     title.text = @"仿淘宝动画";
-    title.backgroundColor = [UIColor whiteColor];
+    title.textColor = [UIColor whiteColor];
+    title.backgroundColor = RGBCOLOR(25, 136, 53);
     title.textAlignment = NSTextAlignmentCenter;
     [self.mainBackgroundView addSubview:title];
     
     // 返回
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"pop_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goToBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.frame = CGRectMake(5, 22, 40 , 40);
     backButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);

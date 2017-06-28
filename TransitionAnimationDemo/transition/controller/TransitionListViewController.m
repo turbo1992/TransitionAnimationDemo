@@ -58,14 +58,14 @@ static char indexPathAssociation;
         
     [self.view addSubview:self.collectionView];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
-    backItem.title = @"返回";
-    self.navigationItem.backBarButtonItem = backItem;
+    self.navigationController.navigationBar.barTintColor = RGBCOLOR(25, 136, 53);
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     /* 当前点击item */
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(self.view.frame.size.width - 65, 5, 45, 30);
+    button.frame = CGRectMake(self.view.frame.size.width - 50, 5, 45, 30);
     [button setTitle:@"0" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.navigationController.navigationBar addSubview:button];
     [self addAssion:button];
 }

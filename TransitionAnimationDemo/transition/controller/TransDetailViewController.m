@@ -34,18 +34,31 @@
 
 - (void)initUI {
     
-    self.iconImgV.frame = CGRectMake(.0f, 64.0f, self.view.frame.size.width, self.view.frame.size.width/1.33);
-    [self.view addSubview:self.iconImgV];
+    /* 返回 */
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    back.frame = CGRectMake(5, 5, 40, 40);
+    [back setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
+    [back setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [back addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem*backItem = [[UIBarButtonItem alloc]initWithCustomView:back];
+    self.navigationItem.leftBarButtonItem = backItem;
     
+    /* 导航 */
+    UIView *navbarView = [[UIView alloc] initWithFrame:CGRectMake(.0f, .0f, IphoneWidth, 20.0f)];
+    navbarView.backgroundColor = RGBCOLOR(25, 136, 53);
+    [self.view addSubview:navbarView];
+    
+    /* 导航标题,供3DTouch预览展示 */
     UILabel *title = [[UILabel alloc] init];
-    title.frame = CGRectMake(.0f, 15.0f, self.view.frame.size.width, 44.0f);
+    title.frame = CGRectMake(.0f, 20.0f, self.view.frame.size.width, 44.0f);
     title.text = @"TransDetail";
     title.font = [UIFont boldSystemFontOfSize:17.f];
-    title.backgroundColor = [UIColor whiteColor];
+    title.textColor = [UIColor whiteColor];
+    title.backgroundColor = RGBCOLOR(25, 136, 53);
     title.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:title];
     
-    // PUSH
+    /* PUSH */
     UIButton *push = [UIButton buttonWithType:UIButtonTypeCustom];
     [push addTarget:self action:@selector(pushDetail) forControlEvents:UIControlEventTouchUpInside];
     push.frame = CGRectMake(self.view.frame.size.width/4, self.view.frame.size.width*1.1, self.view.frame.size.width/2 , 40.0f);
@@ -62,14 +75,22 @@
         [self.iconImgV addSubview:self.promptLabel1];
     }
     
-    // 触摸手势返回
-    self.promptLabel2.frame = CGRectMake(0, CGRectGetHeight(self.iconImgV.frame)-35.0f, self.view.frame.size.width, 25.0f);
-    [self.iconImgV addSubview:self.promptLabel2];
+    /* 封面大图 */
+    self.iconImgV.frame = CGRectMake(.0f, 64.0f, self.view.frame.size.width, self.view.frame.size.width/1.33);
+    [self.view addSubview:self.iconImgV];
     
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired=1;
     self.iconImgV.userInteractionEnabled = YES;
     [self.iconImgV addGestureRecognizer:tapGesture];
+    
+    // 轻触返回提示
+    self.promptLabel2.frame = CGRectMake(0, CGRectGetHeight(self.iconImgV.frame)-35.0f, self.view.frame.size.width, 25.0f);
+    [self.iconImgV addSubview:self.promptLabel2];
+}
+
+- (void)goback {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)pushDetail {
