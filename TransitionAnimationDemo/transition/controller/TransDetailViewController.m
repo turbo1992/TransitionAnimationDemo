@@ -68,6 +68,10 @@
     [push setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.view addSubview:push];
     
+    /* 封面大图 */
+    self.iconImgV.frame = CGRectMake(.0f, 64.0f, self.view.frame.size.width, self.view.frame.size.width/1.33);
+    [self.view addSubview:self.iconImgV];
+    
     // 判断3dtouch权限
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         [self registerForPreviewingWithDelegate:self sourceView:self.iconImgV];
@@ -75,10 +79,7 @@
         [self.iconImgV addSubview:self.promptLabel1];
     }
     
-    /* 封面大图 */
-    self.iconImgV.frame = CGRectMake(.0f, 64.0f, self.view.frame.size.width, self.view.frame.size.width/1.33);
-    [self.view addSubview:self.iconImgV];
-    
+    // 添加触摸手势
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired=1;
     self.iconImgV.userInteractionEnabled = YES;
